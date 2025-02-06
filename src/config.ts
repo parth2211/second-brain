@@ -1,1 +1,0 @@
-export const JWT_PASSWORD = "parth@8907"

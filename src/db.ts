@@ -2,7 +2,7 @@
 
 import mongoose, {model, Schema} from 'mongoose';
 
-mongoose.connect("url")
+mongoose.connect("mongodb+srv://parthdhorajiya:cuIYWmb5j6qa0xQA@cluster0.hhcnv.mongodb.net/")
 
 const UserSchema = new Schema({
     username: {type: String, unique: true},
@@ -10,3 +10,13 @@ const UserSchema = new Schema({
 })
 
 export const UserModel = model("User", UserSchema);
+
+const ContentSchema = new Schema({
+    title: String,
+    link: String,
+    tags: [{type: mongoose.Types.ObjectId, ref: 'Tag'}],
+    userId: {type: mongoose.Types.ObjectId, ref: 'User', require: true},
+    authorId: {type: mongoose.Types.ObjectId, ref: 'User'}
+})
+
+export const ContentModel = model('Content', ContentSchema);

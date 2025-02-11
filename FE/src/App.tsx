@@ -1,12 +1,8 @@
-import './App.css'
-import { Button } from './components/ui/Button'
-import { PlusIcon } from './icons/PlusIcon'
+import { Signup } from "./pages/Auth"
+import { Dashboard } from "./pages/dashboard"
 
 function App() {
-
-  return (
-    <Button variant='primary' text="Share" size='sm' startIcon={<PlusIcon size='sm'></PlusIcon>} onClick={() => {}}></Button>
-  )
+  return <Signup></Signup>
 }
 
 export default App

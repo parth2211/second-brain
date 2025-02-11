@@ -1,13 +1,16 @@
 import { useState } from 'react'
-import './App.css'
 import { Button } from '../components/ui/Button'
 import { Card } from '../components/ui/Cards'
 import { PlusIcon } from '../icons/PlusIcon'
 import { CreateContentModal } from '../components/ui/CreateContentModal'
 import { SideBar } from '../components/ui/Sidebar'
+import { useContent } from '../hooks/useContent'
 
 export function Dashboard() {
   const [modalOpen, setModalOpen] = useState(false);   
+  console.log("Helol")
+  const contents = useContent();
+  console.log(contents)
 
   return (
     <div>
@@ -23,8 +26,14 @@ export function Dashboard() {
                 <Button variant='primary' text="Add Content" size='sm' startIcon={<PlusIcon size='sm'></PlusIcon>} onClick={() => {}}></Button>
             </div>
             <div className='flex gap-4'>
-                <Card type="youtube" link="https://www.youtube.com/watch?v=HlCjrf7hJHk" title="First Video"></Card>
-                <Card type="youtube" link="https://www.youtube.com/watch?v=HlCjrf7hJHk" title="First Video"></Card>
+                {contents}
+                {contents.map(({type, link, title}) => 
+                    <Card
+                    type={type}
+                    link={link}
+                    title={title}
+                    ></Card>
+                )}
             </div>
         </div>
     </div>

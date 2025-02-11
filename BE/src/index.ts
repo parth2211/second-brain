@@ -5,15 +5,20 @@ import { ContentModel, LinkModel, UserModel } from './db';
 import { JWT_PASSWORD } from './config';
 import { userMiddleware } from './middleware';
 import { random } from './utils';
+import cors from "cors";
+
 
 const app = express();
+app.use(cors());
 app.use(express.json());
+
 
 
 app.post("/api/v1/signup", async (req, res) => {
     //zod validation, hash the password
     const username = req.body.username;
     const password = req.body.password;
+    console.log(username);
 
     try {
         await UserModel.create({
@@ -34,11 +39,13 @@ app.post("/api/v1/signup", async (req, res) => {
 app.post("/api/v1/signin", async (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
+    console.log(username);
 
     const existingUser = await UserModel.findOne({
         username,
         password
     })
+    console.log(existingUser);
 
     if(existingUser) {
         const token = jwt.sign({
@@ -59,10 +66,12 @@ app.post("/api/v1/signin", async (req, res) => {
 app.post("/api/v1/content", userMiddleware, async (req, res) => {
     const link = req.body.link;
     const title = req.body.title;
+    const type = req.body.type;
 
     await ContentModel.create({
         link, 
         title,
+        type,
         userId: req.body.userId,
         tags: []
     })

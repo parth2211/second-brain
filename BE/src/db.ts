@@ -2,7 +2,7 @@
 
 import mongoose, {model, Schema} from 'mongoose';
 
-mongoose.connect("")
+mongoose.connect("mongodb+srv://parthdhorajiya:cuIYWmb5j6qa0xQA@cluster0.hhcnv.mongodb.net/brainly")
 
 const UserSchema = new Schema({
     username: {type: String, unique: true},
@@ -14,6 +14,7 @@ export const UserModel = model("User", UserSchema);
 const ContentSchema = new Schema({
     title: String,
     link: String,
+    type: String,
     tags: [{type: mongoose.Types.ObjectId, ref: 'Tag'}],
     userId: {type: mongoose.Types.ObjectId, ref: 'User', require: true},
     authorId: {type: mongoose.Types.ObjectId, ref: 'User'}
